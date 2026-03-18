@@ -1,18 +1,12 @@
 {
-  "name": "remotetool",
+  "name": "it-dashboard",
   "version": "1.0.0",
   "main": "server.js",
+  "dependencies": {
+    "express": "^5.2.1",
+    "ws": "^8.19.0"
+  },
   "scripts": {
     "start": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "ws": "^8.13.0"
-  },
-  "description": "",
-  "devDependencies": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+  }
 }
