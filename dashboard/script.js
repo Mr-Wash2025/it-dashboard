@@ -13,29 +13,45 @@ ws.onmessage = (event) => {
         tile = document.createElement('div');
         tile.className = 'tile';
 
+        // Header: name + status
+        const header = document.createElement('div');
+        header.className = 'tile-header';
+
         const input = document.createElement('input');
         input.value = t.name;
-        input.onchange = () => {
-          teacherTiles[input.value] = tile;
-          t.name = input.value;
-        };
-        tile.appendChild(input);
+        input.onchange = () => { teacherTiles[input.value] = tile; t.name = input.value; };
+        header.appendChild(input);
+
+        const status = document.createElement('div');
+        status.className = 'status';
+        header.appendChild(status);
+
+        tile.appendChild(header);
+
+        // Images
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'tile-images';
 
         const screenImg = document.createElement('img');
         screenImg.alt = 'Screen';
-        tile.appendChild(screenImg);
+        imgContainer.appendChild(screenImg);
 
         const webcamImg = document.createElement('img');
         webcamImg.alt = 'Webcam';
-        tile.appendChild(webcamImg);
+        imgContainer.appendChild(webcamImg);
+
+        tile.appendChild(imgContainer);
 
         dashboard.appendChild(tile);
         teacherTiles[t.name] = tile;
       }
 
+      // Update status
+      tile.querySelector('.status').style.background = t.online ? 'green' : 'red';
+
       // Update images
-      tile.children[1].src = t.screen ? `data:image/jpeg;base64,${t.screen}` : '';
-      tile.children[2].src = t.webcam ? `data:image/jpeg;base64,${t.webcam}` : '';
+      tile.querySelectorAll('.tile-images img')[0].src = t.screen ? `data:image/jpeg;base64,${t.screen}` : '';
+      tile.querySelectorAll('.tile-images img')[1].src = t.webcam ? `data:image/jpeg;base64,${t.webcam}` : '';
     });
   }
 };
